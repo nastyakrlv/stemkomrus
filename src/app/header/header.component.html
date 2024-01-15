@@ -1,0 +1,49 @@
+<div class="overlay">
+
+  <header [ngClass]="{ 'scrolled': isScrolled }">
+    <div class="header">
+      <div class="logo">
+        <img class="logo-img" src="assets/logo.svg">
+        <div class="info">
+          <h1 class="title">ООО «СТЭМ КОМПАНИ РУС»</h1>
+          <p class="title-info">Компания занимающаяся куплей продажей тяжелой промышленности</p>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <ul>
+          <li>
+            <a>ГЛАВНАЯ</a>
+          </li>
+          <li>
+            <a>КАТАЛОГ</a>
+          </li>
+          <li>
+            <a>КОРЗИНА</a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="menu-mobile">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button-mobile">
+          <img src="assets/nav.svg">
+        </button>
+        <mat-menu class="menu-list-mobile" xPosition="before" #menu="matMenu">
+          <button mat-menu-item>ГЛАВНАЯ</button>
+          <button mat-menu-item>КАТАЛОГ</button>
+          <button mat-menu-item>КОРЗИНА</button>
+        </mat-menu>
+      </nav>
+
+    </div>
+  </header>
+
+  <div class="photo">
+    <div class="info">
+      <p class="phone">+7 (925) 858-00-77</p>
+      <p class="phone">+7 (495) 532-00-22</p>
+      <p class="phone-info">Будние дни: 09:00 — 21:00</p>
+      <p class="phone-info">Выходные: 10:00 — 18:00</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,170 @@
+@import "../../colors";
+@import "../../breakpoints";
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.overlay {
+  background-image: url("../../assets/header.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 400px;
+  width: 100%;
+
+  header.scrolled {
+    background-color: $green;
+  }
+
+  header {
+    color: $light-grey;
+
+    width: 100%;
+    position: sticky;
+    top: 0;
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 80%;
+      padding: 15px 0;
+      margin: 0 auto;
+      align-items: center;
+
+      .logo {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+
+        .logo-img {
+          height: 74px;
+        }
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          max-width: 400px;
+
+          .title, .title-info {
+            margin: 0;
+          }
+
+          .title {
+            font-size: 1.7rem;
+          }
+
+          .title-info {
+            font-weight: 300;
+          }
+        }
+
+        @media (max-width: $breakpoint-md) {
+          .info {
+            max-width: 310px;
+
+            .title {
+              font-size: 1.2rem;
+            }
+          }
+
+        }
+      }
+
+      @media (max-width: $breakpoint-sm) {
+        .logo-img {
+          display: none;
+        }
+
+        .title-info {
+          display: none;
+        }
+      }
+
+      .menu-mobile {
+        display: none;
+      }
+
+      .menu {
+        ul {
+          display: flex;
+          flex-direction: row;
+          gap: 30px;
+
+          a {
+            font-size: 1.3rem;
+          }
+        }
+
+        @media (max-width: $breakpoint-md) {
+          ul {
+            gap: 20px;
+
+            a {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+
+      @media (max-width: $breakpoint-sm) {
+        .menu-mobile {
+          display: block;
+        }
+
+        .menu {
+          display: none;
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint-lg) {
+      .header {
+        width: 90%;
+      }
+    }
+  }
+
+
+  .photo {
+    color: white;
+
+    display: flex;
+    justify-content: end;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    min-height: 300px;
+
+    .info {
+      p {
+        text-align: end;
+        margin: 0;
+      }
+
+      .phone {
+        font-weight: 700;
+      }
+
+      .phone-info {
+        font-weight: 300;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    .photo {
+      width: 90%;
+    }
+  }
+}
+
+
+
+
+
+
