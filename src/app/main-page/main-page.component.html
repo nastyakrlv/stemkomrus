@@ -1,0 +1,40 @@
+<main>
+  <section class="benefits-section">
+    <div class="benefits">
+      @for (benefit of benefits; track benefit) {
+        <div class="benefit">
+          <img [src]="benefit.img">
+          <p>{{ benefit.description }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="about-us">
+    <h2>О НАС</h2>
+    <div class="about">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequatur culpa deleniti distinctio
+        dolore illum, officia quos repudiandae saepe unde! Ab enim eum eveniet nemo nobis quam repellat velit.
+        Minus?</p>
+    </div>
+  </section>
+
+  <section class="scheme-of-cooperation-section">
+    <div class="scheme-of-cooperation">
+      <h2>СХЕМА СОТРУДНИЧЕСТВА</h2>
+      <div class="cooperations">
+        @for (cooperation of cooperation; track cooperation) {
+          <div class="cooperation">
+            <div class="img-background">
+              <img [src]="cooperation.img">
+            </div>
+            <div class="info">
+              <h4>{{ cooperation.title }}</h4>
+              <p>{{ cooperation.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</main>

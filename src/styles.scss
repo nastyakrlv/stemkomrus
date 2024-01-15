@@ -39,6 +39,9 @@ body, html {
   padding: 0;
   color: $black;
   font-family: 'Poppins', sans-serif;
+  background-color: white;
+  font-weight: 300;
+  min-width: 358px;
 }
 
 .mat-mdc-menu-content {

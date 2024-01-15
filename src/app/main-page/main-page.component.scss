@@ -1,0 +1,141 @@
+@import "../../breakpoints";
+@import "../../colors";
+
+section {
+  padding: 20px 0;
+}
+
+h2 {
+  text-decoration: underline;
+  text-underline-offset: 15px;
+  font-weight: 500;
+  margin: 0 0 25px 0;
+  text-align: center;
+}
+
+.benefits-section {
+  background: $light-grey;
+
+  .benefits {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 90%;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .benefit {
+      flex: 1;
+      text-align: center;
+
+      img {
+        height: 70px;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.about-us {
+  text-align: center;
+
+  .about {
+    width: 80%;
+    margin: 0 auto;
+    font-weight: 300;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 90%;
+    }
+  }
+}
+
+.scheme-of-cooperation-section {
+  background: $light-grey;
+
+  .scheme-of-cooperation {
+    width: 80%;
+    margin: 0 auto;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 90%;
+    }
+
+    .cooperations {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      padding-top: 5px;
+
+      @media (max-width: $breakpoint-sm) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 50px;
+      }
+
+      .cooperation {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        gap: 10px;
+        align-items: center;
+        position: relative;
+
+        @media (max-width: $breakpoint-sm) {
+          height: 72px;
+
+          &:not(:last-child)::before {
+            content: "";
+            position: absolute;
+            border-left: 1px dashed #393939;
+            height: 44px;
+            left: 25px;
+            top: 75px;
+          }
+        }
+
+        @media (max-width: 450px) {
+          height: 100px;
+
+          &:not(:last-child)::before {
+            height: 55px;
+            top: 100px;
+          }
+
+        }
+
+        h4, p {
+          margin: 0;
+        }
+
+        h4 {
+          font-weight: 500;
+        }
+
+        .img-background {
+          background-color: $light-green;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+
+          img {
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+}

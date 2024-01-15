@@ -9,11 +9,13 @@ ul {
 
 
 .overlay {
+  min-height: 350px;
   background-image: url("../../assets/header.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 400px;
   width: 100%;
+  position: relative;
+  box-shadow: 0 20px 50px 0 rgba(68, 68, 68, 0.2);
 
   header.scrolled {
     background-color: $green;
@@ -23,8 +25,9 @@ ul {
     color: $light-grey;
 
     width: 100%;
-    position: sticky;
+    position: fixed;
     top: 0;
+    z-index: 100;
 
     .header {
       display: flex;
@@ -34,6 +37,10 @@ ul {
       padding: 15px 0;
       margin: 0 auto;
       align-items: center;
+
+      @media (max-width: $breakpoint-lg) {
+        width: 90%;
+      }
 
       .logo {
         display: flex;
@@ -61,17 +68,14 @@ ul {
           .title-info {
             font-weight: 300;
           }
-        }
 
-        @media (max-width: $breakpoint-md) {
-          .info {
+          @media (max-width: $breakpoint-md) {
             max-width: 310px;
 
             .title {
               font-size: 1.2rem;
             }
           }
-
         }
       }
 
@@ -98,10 +102,8 @@ ul {
           a {
             font-size: 1.3rem;
           }
-        }
 
-        @media (max-width: $breakpoint-md) {
-          ul {
+          @media (max-width: $breakpoint-md) {
             gap: 20px;
 
             a {
@@ -121,26 +123,32 @@ ul {
         }
       }
     }
-
-    @media (max-width: $breakpoint-lg) {
-      .header {
-        width: 90%;
-      }
-    }
   }
 
 
-  .photo {
-    color: white;
-
-    display: flex;
-    justify-content: end;
+  .child {
+    position: absolute;
+    bottom: 0;
+    top: 100px;
     width: 80%;
-    margin: 0 auto;
-    padding-bottom: 15px;
-    min-height: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media (max-width: $breakpoint-lg) {
+      width: 90%;
+
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      top: 70px;
+    }
 
     .info {
+      color: white;
+      position: absolute;
+      top: 0;
+      right: 0;
+
       p {
         text-align: end;
         margin: 0;
@@ -153,12 +161,6 @@ ul {
       .phone-info {
         font-weight: 300;
       }
-    }
-  }
-
-  @media (max-width: $breakpoint-lg) {
-    .photo {
-      width: 90%;
     }
   }
 }

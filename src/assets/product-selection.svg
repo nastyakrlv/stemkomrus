@@ -1,0 +1,17 @@
+<svg width="29" height="33" viewBox="0 0 29 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="SVG" clip-path="url(#clip0_1_2329)">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M6.99951 4.50098L8.94951 2.06348C9.23451 1.70798 9.66501 1.50098 10.121 1.50098H15.8795C16.3355 1.50098 16.766 1.70798 17.051 2.06348L18.9995 4.50098V6.00098C18.9995 6.82898 18.3275 7.50098 17.4995 7.50098H8.49951C7.67151 7.50098 6.99951 6.82898 6.99951 6.00098V4.50098Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M6.99951 24.0012H9.99951" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M6.99951 12.0007H18.9995" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M6.99951 18.001H12.9995" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M18.0315 30.0007H3.99902C2.34152 30.0007 0.999023 28.6582 0.999023 27.0007V7.50073C0.999023 5.84323 2.34152 4.50073 3.99902 4.50073H6.99902" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M18.999 4.50073H21.999C23.6565 4.50073 24.999 5.84323 24.999 7.50073V20.3062" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_7" d="M24.6665 24.1675L21.3335 27.5005L19.3325 25.501" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_8" d="M21.9995 31.501C18.686 31.501 15.9995 28.8145 15.9995 25.501C15.9995 22.1875 18.686 19.501 21.9995 19.501C25.3145 19.501 27.9995 22.1875 27.9995 25.501C27.9995 28.8145 25.3145 31.501 21.9995 31.501Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1_2329">
+<rect width="29" height="32" fill="white" transform="translate(0 0.5)"/>
+</clipPath>
+</defs>
+</svg>
