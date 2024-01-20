@@ -13,7 +13,7 @@
       <nav class="menu">
         <ul>
           <li>
-            <a>ГЛАВНАЯ</a>
+            <a [routerLink]="['/']">ГЛАВНАЯ</a>
           </li>
           <li>
             <a>КАТАЛОГ</a>
@@ -29,7 +29,7 @@
           <img src="assets/nav.svg">
         </button>
         <mat-menu class="menu-list-mobile" xPosition="before" #menu="matMenu">
-          <button mat-menu-item>ГЛАВНАЯ</button>
+          <button mat-menu-item [routerLink]="['/']">ГЛАВНАЯ</button>
           <button mat-menu-item>КАТАЛОГ</button>
           <button mat-menu-item>КОРЗИНА</button>
         </mat-menu>

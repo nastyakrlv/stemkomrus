@@ -41,13 +41,30 @@ body, html {
   font-family: 'Poppins', sans-serif;
   background-color: white;
   font-weight: 300;
-  min-width: 358px;
+  min-width: 290px;
 }
 
 .mat-mdc-menu-content {
-  background-color: $green;
+  background-color: $green !important;
 }
 
 .mat-mdc-menu-item-text {
+  color: $light-grey !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--invalid) .mdc-line-ripple::after {
+  border-bottom-color: $light-green !important;
+}
+
+
+
+
+.mdc-text-field--filled:not(.mdc-text-field--invalid).mdc-text-field--focused .mdc-floating-label,
+.mdc-text-field--filled:not(.mdc-text-field--invalid).mdc-text-field--focused .mdc-floating-label--float-above {
+  color:  $light-green !important;
+}
+
+a {
+  text-decoration: none;
   color: $light-grey;
 }

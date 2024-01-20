@@ -20,8 +20,8 @@
   </section>
 
   <section class="scheme-of-cooperation-section">
-    <div class="scheme-of-cooperation">
       <h2>СХЕМА СОТРУДНИЧЕСТВА</h2>
+      <div class="scheme-of-cooperation">
       <div class="cooperations">
         @for (cooperation of cooperation; track cooperation) {
           <div class="cooperation">
@@ -35,6 +35,40 @@
           </div>
         }
       </div>
+    </div>
+  </section>
+
+  <section class="feedback-section">
+    <h2>ОБРАТНАЯ СВЯЗЬ</h2>
+    <div class="feedback">
+      <p>Остались вопросы? Мы готовы проконсультировать вас абсолютно бесплатно!</p>
+      <form [formGroup]="feedback" class="feedback-form" (ngSubmit)="sendFeedback()">
+        <div class="feedback-inputs">
+          <div class="mini-inputs">
+            <mat-form-field class="name">
+              <mat-label>Ваше имя</mat-label>
+              <input matInput formControlName="name" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="phone">
+              <mat-label>Ваш телефон</mat-label>
+              <span matTextPrefix>+7 &nbsp;</span>
+              <input matInput formControlName="phone" type="tel" placeholder="(___)___-__-__">
+            </mat-form-field>
+
+            <mat-form-field class="email">
+              <mat-label>Электронная почта</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="example@example.com">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="text-area">
+            <mat-label class="text-area">Ваш вопрос</mat-label>
+            <textarea matInput formControlName="text" ></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-button type="submit" [disabled]="feedback.invalid">Отправить</button>
+      </form>
     </div>
   </section>
 </main>

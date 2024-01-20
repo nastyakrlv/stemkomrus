@@ -1,17 +1,21 @@
 import {AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {IBenefits} from "../types/benefits.interface";
 import {ICooperation} from "../types/cooperation.interface";
+import {MatInputModule} from '@angular/material/input';
+import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [],
+  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
 export class MainPageComponent {
   public benefits: IBenefits[];
   public cooperation: ICooperation[];
+  public feedback: FormGroup;
 
   constructor() {
     this.benefits = [
@@ -55,5 +59,16 @@ export class MainPageComponent {
         description: "Дождитесь ответа от нашего отдела обработки заказов"
       },
     ]
+
+    this.feedback = new FormGroup({
+      name: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.email),
+      text: new FormControl('', Validators.required)
+    })
+  }
+
+  public sendFeedback(): void {
+    console.log(this.feedback.value)
   }
 }

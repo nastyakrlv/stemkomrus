@@ -7,7 +7,7 @@ section {
 
 h2 {
   text-decoration: underline;
-  text-underline-offset: 15px;
+  text-underline-offset: 10px;
   font-weight: 500;
   margin: 0 0 25px 0;
   text-align: center;
@@ -31,6 +31,10 @@ h2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
+    }
+
+    @media (max-width: $breakpoint-s) {
+      grid-template-columns: 1fr;
     }
 
     .benefit {
@@ -138,4 +142,55 @@ h2 {
       }
     }
   }
+}
+
+.feedback-section {
+  background: $light-grey;
+
+  .feedback {
+    width: 80%;
+    margin: 0 auto;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 90%;
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+
+      .feedback-inputs {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        gap: 20px;
+
+        @media (max-width: $breakpoint-sm) {
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .mini-inputs {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+
+        .text-area {
+          flex: 1;
+
+          textarea {
+            min-height: 178px;
+          }
+        }
+      }
+
+      button {
+        background-color: $light-green;
+        align-self: end;
+        color: $black;
+      }
+    }
+  }
+
 }
