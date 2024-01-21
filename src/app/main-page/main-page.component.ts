@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, V
 import {IBenefits} from "../types/benefits.interface";
 import {ICooperation} from "../types/cooperation.interface";
 import {MatInputModule} from '@angular/material/input';
-import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormControl, Validators, ReactiveFormsModule, NgForm} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MainService} from "../main.service";
 import {catchError, Observable, ReplaySubject, takeUntil, throwError} from "rxjs";
@@ -20,6 +20,8 @@ export class MainPageComponent implements OnDestroy {
   public cooperation: ICooperation[];
   public feedback: FormGroup;
   private _onDestroy$: ReplaySubject<void>;
+
+  @ViewChild('feedbackForm') feedbackForm!: NgForm;
 
   constructor(private _mainService: MainService) {
     this._onDestroy$ = new ReplaySubject<void>(1);
@@ -82,7 +84,7 @@ export class MainPageComponent implements OnDestroy {
     this._mainService.sendFeedback(this.feedback.value).pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
       takeUntil(this._onDestroy$)
-    ).subscribe(() => this.feedback.reset())
+    ).subscribe(() => this.feedbackForm.resetForm())
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

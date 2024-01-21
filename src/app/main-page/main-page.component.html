@@ -42,7 +42,7 @@
     <h2>ОБРАТНАЯ СВЯЗЬ</h2>
     <div class="feedback">
       <p>Остались вопросы? Мы готовы проконсультировать вас абсолютно бесплатно!</p>
-      <form [formGroup]="feedback" class="feedback-form" (ngSubmit)="sendFeedback()">
+      <form [formGroup]="feedback" #feedbackForm="ngForm" class="feedback-form" (ngSubmit)="sendFeedback()">
         <div class="feedback-inputs">
           <div class="mini-inputs">
             <mat-form-field class="name">
