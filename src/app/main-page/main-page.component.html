@@ -54,11 +54,17 @@
               <mat-label>Ваш телефон</mat-label>
               <span matTextPrefix>+7 &nbsp;</span>
               <input matInput formControlName="phone" type="tel" placeholder="(___)___-__-__" maxlength="10">
+              @if (feedback.hasError('atLeastOneRequired')) {
+                <mat-hint align="start">Заполните поле с номером телефона или электронной почтой</mat-hint>
+              }
             </mat-form-field>
 
             <mat-form-field class="email">
               <mat-label>Электронная почта</mat-label>
               <input matInput formControlName="email" type="email" placeholder="example@example.com">
+              @if (feedback.hasError('atLeastOneRequired')) {
+                <mat-hint align="start">Заполните поле с номером телефона или электронной почтой</mat-hint>
+              }
             </mat-form-field>
           </div>
 

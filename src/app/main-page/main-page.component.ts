@@ -2,16 +2,25 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, V
 import {IBenefits} from "../types/benefits.interface";
 import {ICooperation} from "../types/cooperation.interface";
 import {MatInputModule} from '@angular/material/input';
-import {FormGroup, FormControl, Validators, ReactiveFormsModule, NgForm} from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+  NgForm,
+  AbstractControl,
+  ValidationErrors, FormsModule
+} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MainService} from "../main.service";
 import {catchError, Observable, ReplaySubject, takeUntil, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule],
+  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, FormsModule, MatFormFieldModule],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
@@ -69,10 +78,10 @@ export class MainPageComponent implements OnDestroy {
 
     this.feedback = new FormGroup({
       name: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
+      phone: new FormControl(''),
       email: new FormControl('', Validators.email),
       text: new FormControl('', Validators.required)
-    })
+    }, {validators: this.atLeastOneRequired});
   }
 
   ngOnDestroy(): void {
@@ -81,6 +90,7 @@ export class MainPageComponent implements OnDestroy {
   }
 
   public sendFeedback(): void {
+    console.log(this.feedback.hasError('atLeastOne'))
     this._mainService.sendFeedback(this.feedback.value).pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
       takeUntil(this._onDestroy$)
@@ -90,5 +100,12 @@ export class MainPageComponent implements OnDestroy {
   private handleError(error: HttpErrorResponse): Observable<never> {
     alert('Непредвиденная ошибка');
     return throwError(() => error);
+  }
+
+  private atLeastOneRequired(control: AbstractControl): ValidationErrors | null {
+    if (control.get('email')?.value || control.get('phone')?.value) {
+      return null;
+    }
+    return {'atLeastOneRequired': true};
   }
 }
