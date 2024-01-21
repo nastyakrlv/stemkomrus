@@ -1,9 +1,12 @@
-import {AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {IBenefits} from "../types/benefits.interface";
 import {ICooperation} from "../types/cooperation.interface";
 import {MatInputModule} from '@angular/material/input';
 import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MainService} from "../main.service";
+import {catchError, Observable, ReplaySubject, takeUntil, throwError} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-main-page',
@@ -12,12 +15,14 @@ import {MatButtonModule} from '@angular/material/button';
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnDestroy {
   public benefits: IBenefits[];
   public cooperation: ICooperation[];
   public feedback: FormGroup;
+  private _onDestroy$: ReplaySubject<void>;
 
-  constructor() {
+  constructor(private _mainService: MainService) {
+    this._onDestroy$ = new ReplaySubject<void>(1);
     this.benefits = [
       {
         img: "assets/clock.svg",
@@ -68,7 +73,20 @@ export class MainPageComponent {
     })
   }
 
+  ngOnDestroy(): void {
+    this._onDestroy$.next();
+    this._onDestroy$.complete();
+  }
+
   public sendFeedback(): void {
-    console.log(this.feedback.value)
+    this._mainService.sendFeedback(this.feedback.value).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+      takeUntil(this._onDestroy$)
+    ).subscribe(() => this.feedback.reset())
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    alert('Непредвиденная ошибка');
+    return throwError(() => error);
   }
 }
