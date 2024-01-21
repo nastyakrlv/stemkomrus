@@ -1,0 +1,29 @@
+@import "../../colors";
+@import "../../breakpoints";
+
+footer {
+  background-color: $green;
+  color: $light-grey;
+
+  .footer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 90%;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.8rem;
+    }
+
+    .info {
+      font-size: 0.6rem;
+    }
+  }
+}
