@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {IBenefits} from "../types/benefits.interface";
 import {ICooperation} from "../types/cooperation.interface";
 import {MatInputModule} from '@angular/material/input';
@@ -16,24 +25,42 @@ import {MainService} from "../main.service";
 import {catchError, Observable, ReplaySubject, takeUntil, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {ICatalog} from "../types/catalog.interface";
+import {URL} from "../../constants";
+import {CommonModule} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, FormsModule, MatFormFieldModule],
+  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, FormsModule, MatFormFieldModule, CommonModule, RouterLink],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
-export class MainPageComponent implements OnDestroy {
+export class MainPageComponent implements OnDestroy, OnInit {
   public benefits: IBenefits[];
   public cooperation: ICooperation[];
+  public catalog: ICatalog;
   public feedback: FormGroup;
+  public url: string;
   private _onDestroy$: ReplaySubject<void>;
+
 
   @ViewChild('feedbackForm') feedbackForm!: NgForm;
 
   constructor(private _mainService: MainService) {
     this._onDestroy$ = new ReplaySubject<void>(1);
+
+    this.url = URL;
+
+    this.catalog = {
+      img_path: '',
+      name: '',
+      name_rus: '',
+      type: '',
+      contains: []
+    };
+
     this.benefits = [
       {
         img: "assets/clock.svg",
@@ -84,17 +111,35 @@ export class MainPageComponent implements OnDestroy {
     }, {validators: this.atLeastOneRequired});
   }
 
+  ngOnInit(): void {
+    this.getCatalogOrItem('')
+  }
+
   ngOnDestroy(): void {
     this._onDestroy$.next();
     this._onDestroy$.complete();
   }
 
   public sendFeedback(): void {
-    console.log(this.feedback.hasError('atLeastOne'))
     this._mainService.sendFeedback(this.feedback.value).pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
       takeUntil(this._onDestroy$)
     ).subscribe(() => this.feedbackForm.resetForm())
+  }
+
+  public getCatalogOrItem(path: string | null): void {
+    this._mainService.getCatalogOrItem(path).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+      takeUntil(this._onDestroy$)
+    ).subscribe((response: ICatalog) => {
+      this.catalog = response;
+      this.catalog.contains = this.catalog.contains.slice(0, 2);
+      this.catalog.contains.push({
+        img_path: "",
+        name: "",
+        name_rus: "Все категории \u2192"
+      })
+    })
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
@@ -108,4 +153,5 @@ export class MainPageComponent implements OnDestroy {
     }
     return {'atLeastOneRequired': true};
   }
+
 }

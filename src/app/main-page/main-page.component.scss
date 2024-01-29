@@ -1,5 +1,6 @@
 @import "../../breakpoints";
 @import "../../colors";
+@import "../../style";
 
 section {
   padding: 20px 0;
@@ -52,10 +53,10 @@ h2 {
   }
 }
 
-.about-us {
+.about-us-section {
   text-align: center;
 
-  .about {
+  .about-us {
     width: 80%;
     margin: 0 auto;
     font-weight: 300;
@@ -144,6 +145,41 @@ h2 {
   }
 }
 
+.catalog-section {
+  .catalog {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .subcatalog {
+      @extend %subcatalog;
+
+      &:last-child {
+        align-items: center;
+        justify-content: center;
+
+        h4 {
+          margin: 0;
+        }
+
+        img {
+          display: none;
+        }
+
+      }
+    }
+
+    @media (max-width: $breakpoint-lg) {
+      width: 90%;
+    }
+
+  }
+}
+
 .feedback-section {
   background: $light-grey;
 
@@ -177,7 +213,7 @@ h2 {
 
           mat-hint {
             font-size: 0.7rem;
-            color: #F44336;
+            color: $black;
           }
         }
 
@@ -194,6 +230,11 @@ h2 {
         background-color: $light-green;
         align-self: end;
         color: $black;
+
+        &:disabled {
+          background-color: lighten($light-green, 10%);
+          color: lighten($black, 50%);
+        }
       }
     }
   }

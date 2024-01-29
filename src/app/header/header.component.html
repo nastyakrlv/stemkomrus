@@ -16,7 +16,7 @@
             <a [routerLink]="['/']">ГЛАВНАЯ</a>
           </li>
           <li>
-            <a>КАТАЛОГ</a>
+            <a [routerLink]="['/catalog']">КАТАЛОГ</a>
           </li>
           <li>
             <a>КОРЗИНА</a>
@@ -30,7 +30,7 @@
         </button>
         <mat-menu class="menu-list-mobile" xPosition="before" #menu="matMenu">
           <button mat-menu-item [routerLink]="['/']">ГЛАВНАЯ</button>
-          <button mat-menu-item>КАТАЛОГ</button>
+          <button mat-menu-item [routerLink]="['catalog']">КАТАЛОГ</button>
           <button mat-menu-item>КОРЗИНА</button>
         </mat-menu>
       </nav>

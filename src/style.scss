@@ -1,0 +1,23 @@
+@import "colors";
+
+%subcatalog {
+  color: $black;
+  border: $light-green solid 1px;
+  padding: 10px 10px;
+  width: 210px;
+  height: 210px;
+
+  display: flex;
+  flex-direction: column;
+
+  h4 {
+    font-size: 1.3rem;
+    margin-top: 0;
+  }
+
+  img {
+    height: 150px;
+    align-self: center;
+    aspect-ratio: 1/1;
+  }
+}

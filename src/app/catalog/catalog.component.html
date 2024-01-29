@@ -1,0 +1,13 @@
+<main>
+  <h2>{{catalog?.name_rus | uppercase}}</h2>
+  <div class="catalog">
+    @for (subcatalog of catalog?.contains; track subcatalog.name) {
+      <a [routerLink]="[subcatalog.name]" class="subcatalog">
+        <h4>{{subcatalog.name_rus | uppercase}}</h4>
+        @if (subcatalog.img_path) {
+          <img [src]="url + subcatalog.img_path">
+        }
+      </a>
+    }
+  </div>
+</main>

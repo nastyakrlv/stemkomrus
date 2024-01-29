@@ -10,9 +10,9 @@
     </div>
   </section>
 
-  <section class="about-us">
+  <section class="about-us-section">
     <h2>О НАС</h2>
-    <div class="about">
+    <div class="about-us">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequatur culpa deleniti distinctio
         dolore illum, officia quos repudiandae saepe unde! Ab enim eum eveniet nemo nobis quam repellat velit.
         Minus?</p>
@@ -35,6 +35,20 @@
           </div>
         }
       </div>
+    </div>
+  </section>
+
+  <section class="catalog-section">
+    <h2>КАТАЛОГ</h2>
+    <div class="catalog">
+      @for (subcatalog of catalog.contains; track subcatalog.name) {
+        <a [routerLink]="subcatalog.name ? ['/catalog', subcatalog.name] : '/catalog'" class="subcatalog">
+          <h4>{{subcatalog.name_rus | uppercase}}</h4>
+          @if (subcatalog.img_path) {
+            <img [src]="url + subcatalog.img_path">
+          }
+        </a>
+      }
     </div>
   </section>
 
