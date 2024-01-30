@@ -5,11 +5,12 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {ICatalog, IItem} from "../types/catalog.interface";
 import {ActivatedRoute} from "@angular/router";
 import {CatalogComponent} from "../catalog/catalog.component";
+import {ItemComponent} from "../item/item.component";
 
 @Component({
   selector: 'app-catalog-or-item',
   standalone: true,
-  imports: [CatalogComponent],
+  imports: [CatalogComponent, ItemComponent],
   templateUrl: './catalog-or-item.component.html',
   styleUrl: './catalog-or-item.component.scss'
 })

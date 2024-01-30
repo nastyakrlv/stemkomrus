@@ -1,3 +1,5 @@
 @if (type === "catalog") {
   <app-catalog [catalog]="catalogOrItem"></app-catalog>
+} @else if (type === "item") {
+  <app-item [item]="catalogOrItem"></app-item>
 }

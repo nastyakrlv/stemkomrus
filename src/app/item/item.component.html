@@ -1,0 +1,23 @@
+<main>
+  <h2>{{item?.name_rus | uppercase}}</h2>
+  <div class="item">
+    <img [src]="url+item!.img_path">
+    <form [formGroup]="itemForm" (ngSubmit)="onAddToCart()">
+        @for (size of item!.sizes; track size.size_name; let idx = $index) {
+          <div class="size">
+            <h4>{{size.size_name}}: </h4>
+            <mat-button-toggle-group [formControlName]="size.size_name">
+              @for (contain of size.contain_sizes; track contain) {
+                @if (idx < item!.sizes.length - 1) {
+                  <mat-button-toggle #toggle [value]="contain"  [disabled]="!isSizeAvailable(size.size_name, contain)" (change)="onSizeChange(size.size_name, $event.value, contain)">{{contain}}</mat-button-toggle>
+                } @else {
+                  <mat-button-toggle #toggle [disabled]="!isSizeAvailable(size.size_name, contain)"  [value]="contain">{{contain}}</mat-button-toggle>
+                }
+              }
+            </mat-button-toggle-group>
+          </div>
+        }
+      <button type="submit" class="cart">Добавить в корзину</button>
+    </form>
+  </div>
+</main>

@@ -20,6 +20,6 @@ export interface IItem extends IGeneral {
 }
 
 export interface ISizes {
-  D: number[];
-  d: number[]
+  size_name: string;
+  contain_sizes: string[]
 }
