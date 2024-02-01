@@ -1,12 +1,8 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
-  QueryList,
   ViewChild,
-  ViewChildren
 } from '@angular/core';
 import {IBenefits} from "../types/benefits.interface";
 import {ICooperation} from "../types/cooperation.interface";

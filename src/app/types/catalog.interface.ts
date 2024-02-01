@@ -16,7 +16,8 @@ export interface IContains {
   name_rus: string
 }
 export interface IItem extends IGeneral {
-  sizes: ISizes[]
+  sizes: ISizes[],
+  img_scheme_path: string
 }
 
 export interface ISizes {

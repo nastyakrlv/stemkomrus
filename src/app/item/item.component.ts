@@ -10,6 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {LocalStorageKeys} from "../types/local-storage-keys.enum";
+import {ICart, IProperties} from "../types/cart.interface";
 
 
 @Component({
@@ -61,8 +62,18 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   public onAddToCart(): void {
-    let product = this.itemForm.value;
-    product.name = this.item.name_rus;
+    let formValue = this.itemForm.value;
+    let quantityValue = formValue.quantity;
+    delete formValue.quantity;
+    let propertiesArray: IProperties[] = Object.entries(formValue).map(([key, value]) => {
+      return { size_name: key, size: value as string };
+    });
+    let product: ICart = {
+      name_rus: this.item.name_rus,
+      img_path: this.item.img_path,
+      quantity: quantityValue,
+      propertiesArray: propertiesArray
+    };
     let existingCart: string | null = localStorage.getItem(LocalStorageKeys.CART);
     let cart = existingCart ? JSON.parse(existingCart) : [];
     cart.push(product);

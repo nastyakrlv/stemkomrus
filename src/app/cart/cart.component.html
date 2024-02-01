@@ -1,0 +1,28 @@
+<main>
+  <div class="cart">
+    <div class="head">
+      <h3 class="head-item">Товар</h3>
+      <h3 class="head-quantity">Цена</h3>
+    </div>
+    <div class="products">
+      @for (item of productsInBasket; track item; let idx = $index) {
+        <div class="item">
+          <div class="item_info">
+            <img [src]="url + item.img_path">
+            <div class="info">
+              <h4 class="name">{{item.name_rus | uppercase}}</h4>
+              @for (property of item.propertiesArray; track property) {
+                <p class="property">{{property.size_name}}: {{property.size}}</p>
+              }
+            </div>
+          </div>
+          <div class="quantity-delete">
+            <p class="quantity">{{item.quantity}} шт.</p>
+            <button mat-button>Удалить</button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</main>
+
