@@ -21,3 +21,14 @@
     aspect-ratio: 1/1;
   }
 }
+
+
+%button {
+  background-color: $light-green;
+  color: $black;
+
+  &:disabled {
+    background-color: lighten($light-green, 10%);
+    color: lighten($black, 50%);
+  }
+}

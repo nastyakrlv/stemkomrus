@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ICatalog, IItem} from "../types/catalog.interface";
-import {CommonModule, UpperCasePipe} from "@angular/common";
-import {RouterLink, RoutesRecognized} from "@angular/router";
+import {CommonModule} from "@angular/common";
+import {RouterLink} from "@angular/router";
 import {URL} from "../../constants";
 
 @Component({
@@ -16,7 +16,7 @@ import {URL} from "../../constants";
 })
 export class CatalogComponent {
   public url: string;
-  @Input({transform: (value: ICatalog | IItem) => value as ICatalog}) catalog?: ICatalog;
+  @Input({transform: (value: ICatalog | IItem) => value as ICatalog}) catalog!: ICatalog;
 
   constructor() {
     this.url = URL;

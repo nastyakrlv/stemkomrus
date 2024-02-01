@@ -7,6 +7,10 @@ main {
   width: 80%;
   margin: 0 auto;
 
+  @media (max-width: $breakpoint-lg) {
+    width: 90%;
+  }
+
   h2 {
     text-decoration: underline;
     text-underline-offset: 10px;
@@ -20,7 +24,12 @@ main {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
+    width: 100%;
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+    }
 
     img {
       height: 200px;
@@ -31,21 +40,74 @@ main {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      max-width: calc( 100% - 200px - 40px);
 
-      .size {
+      @media (max-width: $breakpoint-sm) {
+        max-width: 100%;
+      }
+
+      .input-and-button {
         display: flex;
         flex-direction: row;
         gap: 10px;
+        max-width: 300px;
+        margin-top: 20px;
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+
+        mat-form-field {
+          width: 100px;
+
+          span {
+            padding-right: 10px;
+          }
+        }
+
+        button {
+          @extend %button;
+          height: 56px;
+          min-width: 162px;
+        }
+      }
+
+      .sizes {
+        width: 100%;
+        overflow-x: auto;
+        display: flex;
+        flex-direction: column;  /* Изменяем направление flex на вертикальный */
+        gap: 10px;
+
+      }
+
+      .size {
+        display: flex;
+        flex-wrap: nowrap;
         align-items: center;
+        flex-shrink: 0;
+        min-width: max-content;
 
         h4 {
           margin: 0;
-          width: 20px;
+          min-width: 3rem;
           text-align: center;
+          height: 3rem;
+          display: flex;
+          border: $light-green 1px solid;
+          align-items: center;
+          justify-content: center;
+          border-radius: 3px;
         }
 
         mat-button-toggle {
-          width: 3.5rem;
+          min-width: 3rem;
         }
       }
     }

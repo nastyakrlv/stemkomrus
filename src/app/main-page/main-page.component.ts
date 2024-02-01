@@ -22,18 +22,20 @@ import {
 } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MainService} from "../main.service";
-import {catchError, Observable, ReplaySubject, takeUntil, throwError} from "rxjs";
+import {catchError, finalize, Observable, ReplaySubject, takeUntil, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ICatalog} from "../types/catalog.interface";
 import {URL} from "../../constants";
 import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, FormsModule, MatFormFieldModule, CommonModule, RouterLink],
+  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, FormsModule, MatFormFieldModule, CommonModule, RouterLink, MatProgressSpinnerModule],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
@@ -43,6 +45,7 @@ export class MainPageComponent implements OnDestroy, OnInit {
   public catalog: ICatalog;
   public feedback: FormGroup;
   public url: string;
+  public isLoadingCatalog: boolean;
   private _onDestroy$: ReplaySubject<void>;
 
 
@@ -52,6 +55,7 @@ export class MainPageComponent implements OnDestroy, OnInit {
     this._onDestroy$ = new ReplaySubject<void>(1);
 
     this.url = URL;
+    this.isLoadingCatalog = true;
 
     this.catalog = {
       img_path: '',
@@ -130,6 +134,7 @@ export class MainPageComponent implements OnDestroy, OnInit {
   public getCatalogOrItem(path: string | null): void {
     this._mainService.getCatalogOrItem(path).pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
+      finalize(() => this.isLoadingCatalog = false),
       takeUntil(this._onDestroy$)
     ).subscribe((response: ICatalog) => {
       this.catalog = response;

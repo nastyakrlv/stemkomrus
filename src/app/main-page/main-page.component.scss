@@ -146,6 +146,9 @@ h2 {
 }
 
 .catalog-section {
+  mat-spinner {
+    margin: 0 auto;
+  }
   .catalog {
     width: 80%;
     margin: 0 auto;
@@ -227,14 +230,8 @@ h2 {
       }
 
       button {
-        background-color: $light-green;
+        @extend %button;
         align-self: end;
-        color: $black;
-
-        &:disabled {
-          background-color: lighten($light-green, 10%);
-          color: lighten($black, 50%);
-        }
       }
     }
   }

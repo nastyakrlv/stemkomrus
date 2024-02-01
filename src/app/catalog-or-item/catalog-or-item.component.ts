@@ -3,7 +3,7 @@ import {MainService} from "../main.service";
 import {catchError, Observable, ReplaySubject, takeUntil, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ICatalog, IItem} from "../types/catalog.interface";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CatalogComponent} from "../catalog/catalog.component";
 import {ItemComponent} from "../item/item.component";
 
@@ -22,7 +22,8 @@ export class CatalogOrItemComponent implements OnDestroy, OnInit {
 
   constructor(
     private _mainService: MainService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private router: Router
   ) {
     this._onDestroy$ = new ReplaySubject<void>(1);
     this.catalogOrItem = {} as ICatalog;
@@ -54,7 +55,11 @@ export class CatalogOrItemComponent implements OnDestroy, OnInit {
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    alert('Непредвиденная ошибка');
+    if (error.status === 404) {
+      this.router.navigate(['/page-not-found']);
+    } else {
+      alert('Непредвиденная ошибка');
+    }
     return throwError(() => error);
   }
 }

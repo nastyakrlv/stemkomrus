@@ -40,16 +40,20 @@
 
   <section class="catalog-section">
     <h2>КАТАЛОГ</h2>
-    <div class="catalog">
-      @for (subcatalog of catalog.contains; track subcatalog.name) {
-        <a [routerLink]="subcatalog.name ? ['/catalog', subcatalog.name] : '/catalog'" class="subcatalog">
-          <h4>{{subcatalog.name_rus | uppercase}}</h4>
-          @if (subcatalog.img_path) {
-            <img [src]="url + subcatalog.img_path">
-          }
-        </a>
-      }
-    </div>
+    @if (isLoadingCatalog) {
+      <mat-spinner [diameter]="30"></mat-spinner>
+    } @else {
+      <div class="catalog">
+        @for (subcatalog of catalog.contains; track subcatalog.name) {
+          <a [routerLink]="subcatalog.name ? ['/catalog', subcatalog.name] : '/catalog'" class="subcatalog">
+            <h4>{{subcatalog.name_rus | uppercase}}</h4>
+            @if (subcatalog.img_path) {
+              <img [src]="url + subcatalog.img_path">
+            }
+          </a>
+        }
+      </div>
+    }
   </section>
 
   <section class="feedback-section">
