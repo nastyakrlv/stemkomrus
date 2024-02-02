@@ -82,9 +82,7 @@ main {
         width: 100%;
         overflow-x: auto;
         display: flex;
-        flex-direction: column;  /* Изменяем направление flex на вертикальный */
-        gap: 10px;
-
+        flex-direction: column;
       }
 
       .size {

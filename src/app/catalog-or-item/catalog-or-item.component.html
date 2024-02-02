@@ -1,5 +1,10 @@
-@if (type === "catalog") {
-  <app-catalog [catalog]="catalogOrItem"></app-catalog>
-} @else if (type === "item") {
-  <app-item [item]="catalogOrItem"></app-item>
+@if (isLoadingCatalogOrCart) {
+  <mat-spinner [diameter]="30"></mat-spinner>
+} @else {
+  @if (type === "catalog") {
+    <app-catalog [catalog]="catalogOrItem"></app-catalog>
+  } @else if (type === "item") {
+    <app-item [item]="catalogOrItem"></app-item>
+  }
 }
+

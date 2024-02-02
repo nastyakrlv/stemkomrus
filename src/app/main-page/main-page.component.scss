@@ -206,13 +206,17 @@ h2 {
 
         @media (max-width: $breakpoint-sm) {
           flex-direction: column;
-          gap: 0;
+          gap: 1rem;
         }
 
         .mini-inputs {
           display: flex;
           flex-direction: column;
           flex: 1;
+
+          @media (max-width: $breakpoint-sm) {
+            gap: 1rem;
+          }
 
           mat-hint {
             font-size: 0.7rem;

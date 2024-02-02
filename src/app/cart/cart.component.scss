@@ -86,6 +86,34 @@ main {
         }
       }
     }
+
+    .buy {
+      padding-top: 20px;
+      width: 70%;
+
+      @media (max-width: $breakpoint-sm) {
+        width: 100%;
+      }
+
+      .purchase-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        @media (max-width: $breakpoint-sm) {
+          gap: 1rem;
+        }
+
+        mat-hint {
+          font-size: 0.7rem;
+          color: $black;
+        }
+
+        button {
+          @extend %button;
+        }
+      }
+    }
   }
 }
 
