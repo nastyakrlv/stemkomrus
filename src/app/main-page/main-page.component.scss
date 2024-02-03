@@ -149,6 +149,7 @@ h2 {
   mat-spinner {
     margin: 0 auto;
   }
+
   .catalog {
     width: 80%;
     margin: 0 auto;
@@ -236,6 +237,7 @@ h2 {
       button {
         @extend %button;
         align-self: end;
+        width: 40%;
       }
     }
   }

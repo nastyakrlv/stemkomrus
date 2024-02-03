@@ -10,21 +10,21 @@
           <div class="item_info">
             <img [src]="url + item.img_path">
             <div class="info">
-              <h4 class="name">{{item.name_rus | uppercase}}</h4>
+              <h4 class="name">{{ item.name_rus | uppercase }}</h4>
               @for (property of item.propertiesArray; track property) {
-                <p class="property">{{property.size_name}}: {{property.size}}</p>
+                <p class="property">{{ property.size_name }}: {{ property.size }}</p>
               }
             </div>
           </div>
           <div class="quantity-delete">
-            <p class="quantity">{{item.quantity}} шт.</p>
+            <p class="quantity">{{ item.quantity }} шт.</p>
             <button mat-button (click)="removeFromCart(idx)">Удалить</button>
           </div>
         </div>
       }
     </div>
     <div class="buy">
-      <form [formGroup]="purchaseForm" class="purchase-form">
+      <form [formGroup]="purchaseForm" #purchase="ngForm" (ngSubmit)="sendCart()" class="purchase-form">
         <mat-form-field class="name">
           <mat-label>Ваше имя</mat-label>
           <input matInput formControlName="name" type="text">
@@ -47,7 +47,13 @@
           }
         </mat-form-field>
 
-        <button mat-button  [disabled]="purchaseForm.invalid">Купить</button>
+        <button mat-button type="submit" [disabled]="purchaseForm.invalid">
+          @if (isLoadingSendCart) {
+            <mat-spinner [diameter]="20"></mat-spinner>
+          } @else {
+            Купить
+          }
+        </button>
       </form>
 
     </div>

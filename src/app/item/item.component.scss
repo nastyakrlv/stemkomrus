@@ -40,7 +40,7 @@ main {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      max-width: calc( 100% - 200px - 40px);
+      max-width: calc(100% - 200px - 40px);
 
       @media (max-width: $breakpoint-sm) {
         max-width: 100%;

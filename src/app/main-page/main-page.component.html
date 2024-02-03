@@ -20,8 +20,8 @@
   </section>
 
   <section class="scheme-of-cooperation-section">
-      <h2>СХЕМА СОТРУДНИЧЕСТВА</h2>
-      <div class="scheme-of-cooperation">
+    <h2>СХЕМА СОТРУДНИЧЕСТВА</h2>
+    <div class="scheme-of-cooperation">
       <div class="cooperations">
         @for (cooperation of cooperation; track cooperation) {
           <div class="cooperation">
@@ -46,7 +46,7 @@
       <div class="catalog">
         @for (subcatalog of catalog.contains; track subcatalog.name) {
           <a [routerLink]="subcatalog.name ? ['/catalog', subcatalog.name] : '/catalog'" class="subcatalog">
-            <h4>{{subcatalog.name_rus | uppercase}}</h4>
+            <h4>{{ subcatalog.name_rus | uppercase }}</h4>
             @if (subcatalog.img_path) {
               <img [src]="url + subcatalog.img_path">
             }
@@ -88,10 +88,16 @@
 
           <mat-form-field class="text-area">
             <mat-label class="text-area">Ваш вопрос</mat-label>
-            <textarea matInput formControlName="text" ></textarea>
+            <textarea matInput formControlName="text"></textarea>
           </mat-form-field>
         </div>
-        <button mat-button type="submit" [disabled]="feedback.invalid">Отправить</button>
+        <button mat-button type="submit" [disabled]="feedback.invalid">
+          @if (isLoadingFeedback) {
+            <mat-spinner [diameter]="20"></mat-spinner>
+          } @else {
+            Отправить
+          }
+        </button>
       </form>
     </div>
   </section>

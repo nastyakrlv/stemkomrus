@@ -2,7 +2,7 @@
   <h2>{{ item.name_rus | uppercase }}</h2>
   <div class="item">
     <img [src]="url+item.img_scheme_path">
-    <form [formGroup]="itemForm" (ngSubmit)="onAddToCart()">
+    <form [formGroup]="itemForm" #itemPropertiesForm="ngForm" (ngSubmit)="onAddToCart()">
       <div class="sizes">
         @for (size of item.sizes; track size.size_name; let idx = $index) {
           <div class="size">

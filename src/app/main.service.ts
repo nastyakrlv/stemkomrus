@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {IFeedback} from "./types/feedback.interface";
 import {catchError, Observable, throwError} from "rxjs";
@@ -6,16 +6,25 @@ import {API_URL} from "../constants";
 import {IMessage} from "./types/message.interface";
 import {ICatalog, ISizes} from "./types/catalog.interface";
 import {IFilterParams} from "./types/filter-params.interface";
+import {IPurchases} from "./types/cart.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {
+  }
 
   public sendFeedback(information: IFeedback): Observable<IMessage> {
     return this._http.post<IMessage>(API_URL + 'email_question', information).pipe(
+      catchError((error: HttpErrorResponse) =>
+        throwError(() => error))
+    )
+  }
+
+  public sendCart(information: IPurchases): Observable<IMessage> {
+    return this._http.post<IMessage>(API_URL + 'email_order', information).pipe(
       catchError((error: HttpErrorResponse) =>
         throwError(() => error))
     )

@@ -26,12 +26,23 @@ import {URL} from "../../constants";
 import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, FormsModule, MatFormFieldModule, CommonModule, RouterLink, MatProgressSpinnerModule],
+  imports: [
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    FormsModule,
+    MatFormFieldModule,
+    CommonModule,
+    RouterLink,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
+  ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
@@ -42,16 +53,20 @@ export class MainPageComponent implements OnDestroy, OnInit {
   public feedback: FormGroup;
   public url: string;
   public isLoadingCatalog: boolean;
+  public isLoadingFeedback: boolean;
   private _onDestroy$: ReplaySubject<void>;
-
 
   @ViewChild('feedbackForm') feedbackForm!: NgForm;
 
-  constructor(private _mainService: MainService) {
+  constructor(
+    private _mainService: MainService,
+    private _snackBar: MatSnackBar
+  ) {
     this._onDestroy$ = new ReplaySubject<void>(1);
 
     this.url = URL;
     this.isLoadingCatalog = true;
+    this.isLoadingFeedback = false;
 
     this.catalog = {
       img_path: '',
@@ -121,10 +136,15 @@ export class MainPageComponent implements OnDestroy, OnInit {
   }
 
   public sendFeedback(): void {
+    this.isLoadingFeedback = true;
     this._mainService.sendFeedback(this.feedback.value).pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
-      takeUntil(this._onDestroy$)
-    ).subscribe(() => this.feedbackForm.resetForm())
+      takeUntil(this._onDestroy$),
+      finalize(() => this.isLoadingFeedback = false)
+    ).subscribe(() => {
+      this.feedbackForm.resetForm();
+      this.openSnackBar();
+    })
   }
 
   public getCatalogOrItem(path: string | null): void {
@@ -146,6 +166,14 @@ export class MainPageComponent implements OnDestroy, OnInit {
   private handleError(error: HttpErrorResponse): Observable<never> {
     alert('Непредвиденная ошибка');
     return throwError(() => error);
+  }
+
+  private openSnackBar(): void {
+    this._snackBar.open('Спасибо за обратную связь!', '', {
+      duration: 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
   private atLeastOneRequired(control: AbstractControl): ValidationErrors | null {

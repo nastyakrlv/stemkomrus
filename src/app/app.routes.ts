@@ -10,5 +10,5 @@ export const routes: Routes = [
   {path: 'catalog', component: CatalogOrItemComponent},
   {path: 'catalog/:subcatalog', component: CatalogOrItemComponent},
   {path: 'catalog/:subcatalog/:subcatalog', component: CatalogOrItemComponent},
-  { path: '**', component: PageNotFoundComponent }
+  {path: '**', component: PageNotFoundComponent}
 ];

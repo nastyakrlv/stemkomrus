@@ -1,17 +1,26 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ICatalog, IItem, ISizes} from "../types/catalog.interface";
 import {URL} from "../../constants";
 import {CommonModule} from "@angular/common";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  NgForm,
+  ReactiveFormsModule,
+  Validators
+} from "@angular/forms";
 import {MainService} from "../main.service";
-import {catchError, finalize, Observable, ReplaySubject, takeUntil, throwError, timeout} from "rxjs";
+import {catchError, Observable, ReplaySubject, takeUntil, throwError, timeout} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {LocalStorageKeys} from "../types/local-storage-keys.enum";
 import {ICart, IProperties} from "../types/cart.interface";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -24,7 +33,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   templateUrl: './item.component.html',
   styleUrl: './item.component.scss'
@@ -38,10 +48,12 @@ export class ItemComponent implements OnInit, OnDestroy {
 
 
   @Input({transform: (value: ICatalog | IItem) => value as IItem}) item!: IItem;
+  @ViewChild('itemPropertiesForm') itemPropertiesForm!: NgForm;
 
   constructor(
     private formBuilder: FormBuilder,
-    private _mainService: MainService
+    private _mainService: MainService,
+    private _snackBar: MatSnackBar
   ) {
     this.url = URL;
     this.enabledItems = [];
@@ -73,12 +85,10 @@ export class ItemComponent implements OnInit, OnDestroy {
         return {size_name: key, size: value as string};
       });
 
-    let product: ICart = {
-      name_rus: this.item.name_rus,
-      img_path: this.item.img_path,
-      quantity: this.itemForm.value.quantity,
-      propertiesArray: propertiesArray
-    };
+    const {name_rus, img_path} = this.item;
+    const {quantity} = this.itemForm.value;
+    let product: ICart = {name_rus, img_path, quantity, propertiesArray};
+
 
     let existingCart: string | null = localStorage.getItem(LocalStorageKeys.CART);
     let cart: ICart[] = existingCart ? JSON.parse(existingCart) : [];
@@ -98,12 +108,19 @@ export class ItemComponent implements OnInit, OnDestroy {
     }
 
     localStorage.setItem(LocalStorageKeys.CART, JSON.stringify(cart));
+
+    //Очистка формы
+    this.itemPropertiesForm.reset();
+    this.itemForm.patchValue({quantity: 1});
+
+    this.enabledItems = this.enabledItems.slice(0, 1);
+    this.openSnackBar();
   }
 
   public onSizeChange(sizeName: string, selectedValue: string) {
     this._mainService.getFilteredItem(this.item.name, {[sizeName]: selectedValue}).pipe(
-      //Если бэк работает медленно
-      timeout(1000),
+      //Если работает медленно
+      timeout(1400),
       catchError((error: HttpErrorResponse) => this.handleError(error)),
       takeUntil(this._onDestroy$)
     ).subscribe((filteredItem: ISizes) => {
@@ -124,7 +141,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  isSizeAvailable(sizeName: string, size: string): boolean {
+  public isSizeAvailable(sizeName: string, size: string): boolean {
     if (this.isLoadingFilter) {
       return false;
     } else {
@@ -139,4 +156,13 @@ export class ItemComponent implements OnInit, OnDestroy {
     alert('Непредвиденная ошибка. Обновите страницу.');
     return throwError(() => error);
   }
+
+  private openSnackBar(): void {
+    this._snackBar.open('Товар добавлен в коризну!', '', {
+      duration: 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
 }
+

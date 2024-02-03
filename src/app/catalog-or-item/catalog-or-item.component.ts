@@ -8,20 +8,23 @@ import {CatalogComponent} from "../catalog/catalog.component";
 import {ItemComponent} from "../item/item.component";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-
 @Component({
   selector: 'app-catalog-or-item',
   standalone: true,
-  imports: [CatalogComponent, ItemComponent,MatProgressSpinnerModule],
+  imports: [
+    CatalogComponent,
+    ItemComponent,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './catalog-or-item.component.html',
   styleUrl: './catalog-or-item.component.scss'
 })
 export class CatalogOrItemComponent implements OnDestroy, OnInit {
-  private _onDestroy$: ReplaySubject<void>;
   public catalogOrItem: ICatalog | IItem;
   public param?: string | null;
   public type: string;
   public isLoadingCatalogOrCart: boolean;
+  private _onDestroy$: ReplaySubject<void>;
 
   constructor(
     private _mainService: MainService,

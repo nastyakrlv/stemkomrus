@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,12 +7,6 @@ import {AfterViewInit, Component, ElementRef} from '@angular/core';
   templateUrl: './page-not-found.component.html',
   styleUrl: './page-not-found.component.scss'
 })
-export class PageNotFoundComponent implements AfterViewInit{
+export class PageNotFoundComponent {
 
-  constructor(private el: ElementRef) {
-  }
-
-  ngAfterViewInit() {
-    this.el.nativeElement.scrollIntoView();
-  }
 }
