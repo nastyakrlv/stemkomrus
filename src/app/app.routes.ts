@@ -5,10 +5,16 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {CartComponent} from "./cart/cart.component";
 
 export const routes: Routes = [
-  {path: '', component: MainPageComponent, pathMatch: 'full'},
-  {path: 'cart', component: CartComponent},
-  {path: 'catalog', component: CatalogOrItemComponent},
-  {path: 'catalog/:subcatalog', component: CatalogOrItemComponent},
-  {path: 'catalog/:subcatalog/:subcatalog', component: CatalogOrItemComponent},
-  {path: '**', component: PageNotFoundComponent}
+  {path: '', component: MainPageComponent, pathMatch: 'full', title: 'ООО «СТЭМ КОМПАНИ РУС»'},
+  {path: 'cart', component: CartComponent, title: 'КОРЗИНА'},
+  {path: 'catalog', component: CatalogOrItemComponent, title: 'КАТАЛОГ'},
+  {path: 'catalog/:subcatalog', component: CatalogOrItemComponent, title: 'КАТАЛОГ'},
+  {path: 'catalog/:subcatalog/:subcatalog', component: CatalogOrItemComponent, title: 'КАТАЛОГ'},
+  {path: 'catalog/:subcatalog/:subcatalog/:subcatalog', component: CatalogOrItemComponent, title: 'КАТАЛОГ'},
+  {
+    path: 'catalog/:subcatalog/:subcatalog/:subcatalog/:subcatalog',
+    component: CatalogOrItemComponent,
+    title: 'КАТАЛОГ'
+  },
+  {path: '**', component: PageNotFoundComponent, title: 'СТРАНИЦА НЕ НАЙДЕНА'}
 ];
