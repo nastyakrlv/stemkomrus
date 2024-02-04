@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CatalogComponent} from "../catalog/catalog.component";
 import {ItemComponent} from "../item/item.component";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {PageNotFoundComponent} from "../page-not-found/page-not-found.component";
 
 @Component({
   selector: 'app-catalog-or-item',
@@ -14,7 +15,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   imports: [
     CatalogComponent,
     ItemComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    PageNotFoundComponent
   ],
   templateUrl: './catalog-or-item.component.html',
   styleUrl: './catalog-or-item.component.scss'
@@ -24,6 +26,7 @@ export class CatalogOrItemComponent implements OnDestroy, OnInit {
   public param?: string | null;
   public type: string;
   public isLoadingCatalogOrCart: boolean;
+  public isPageNotFound: boolean;
   private _onDestroy$: ReplaySubject<void>;
 
   constructor(
@@ -35,6 +38,7 @@ export class CatalogOrItemComponent implements OnDestroy, OnInit {
     this.catalogOrItem = {} as ICatalog;
     this.type = "";
     this.isLoadingCatalogOrCart = true;
+    this.isPageNotFound = false;
   }
 
   ngOnInit(): void {
@@ -64,7 +68,7 @@ export class CatalogOrItemComponent implements OnDestroy, OnInit {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 404) {
-      this.router.navigate(['/page-not-found']);
+      this.isPageNotFound = true;
     } else {
       alert('Непредвиденная ошибка');
     }

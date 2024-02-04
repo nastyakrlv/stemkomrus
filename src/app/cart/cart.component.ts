@@ -67,6 +67,11 @@ export class CartComponent implements OnInit {
     this.productsInBasket = existingCart ? JSON.parse(existingCart) : [];
   }
 
+  public updateQuantity(quantity: string, index: number): void {
+    this.productsInBasket[index].quantity = quantity;
+    localStorage.setItem(LocalStorageKeys.CART, JSON.stringify(this.productsInBasket));
+  }
+
   public removeFromCart(index: number): void {
     this.productsInBasket.splice(index, 1);
     localStorage.setItem(LocalStorageKeys.CART, JSON.stringify(this.productsInBasket));

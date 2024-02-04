@@ -2,13 +2,13 @@
 
   <header [ngClass]="{ 'scrolled': isScrolled }">
     <div class="header">
-      <div class="logo">
+      <a [routerLink]="['/']" class="logo">
         <img class="logo-img" src="assets/logo.svg">
         <div class="info">
           <h1 class="title">ООО «СТЭМ КОМПАНИ РУС»</h1>
           <p class="title-info">Компания занимающаяся куплей продажей тяжелой промышленности</p>
         </div>
-      </div>
+      </a>
 
       <nav class="menu">
         <ul>
@@ -34,7 +34,6 @@
           <button mat-menu-item [routerLink]="['cart']">КОРЗИНА</button>
         </mat-menu>
       </nav>
-
     </div>
   </header>
 

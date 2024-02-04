@@ -1,6 +1,9 @@
 @import "../../breakpoints";
 @import "../../colors";
 @import "../../style";
+:host {
+  flex: 1;
+}
 
 main {
   display: flex;
@@ -74,9 +77,22 @@ main {
           flex-direction: column;
           justify-content: space-between;
 
-          p {
-            text-align: end;
-            padding: 0 8px 0 8px;
+          mat-form-field {
+            width: 100px;
+
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+
+            input[type=number] {
+              -moz-appearance: textfield;
+            }
+
+            span {
+              padding-right: 10px;
+            }
           }
 
           button {
