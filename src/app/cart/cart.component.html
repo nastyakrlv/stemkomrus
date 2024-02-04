@@ -18,7 +18,7 @@
           </div>
           <div class="quantity-delete">
             <mat-form-field class="quantity">
-              <input matInput type="number" [(ngModel)]="item.quantity" (ngModelChange)="updateQuantity($event, idx)" min="1">
+              <input matInput type="number" [(ngModel)]="item.quantity" (ngModelChange)="updateQuantity($event, idx)" min="1" required>
               <span matSuffix>шт.</span>
             </mat-form-field>
             <button mat-button (click)="removeFromCart(idx)">Удалить</button>

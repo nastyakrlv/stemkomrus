@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {ICatalog, IItem, ISizes} from "../types/catalog.interface";
 import {URL} from "../../constants";
 import {CommonModule} from "@angular/common";
@@ -138,6 +138,16 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.itemForm.patchValue(formValues);
       }
       this.enabledItems.push(filteredItem);
+
+      //Обработка: Если в ответ пришел лишь один доступный размер
+      if (filteredItem.contain_sizes.length === 1) {
+        const formValues = this.itemForm.value;
+        formValues[filteredItem.size_name] = filteredItem.contain_sizes[0];
+        this.itemForm.patchValue(formValues);
+        if (this.item.sizes[this.item.sizes.length - 1].size_name !== filteredItem.size_name) {
+          this.onSizeChange(filteredItem.size_name, filteredItem.contain_sizes[0])
+        }
+      }
     });
   }
 
