@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from "@angular/router";
+import {URL} from "../../constants";
 
 
 @Component({
@@ -19,6 +20,7 @@ import {RouterLink} from "@angular/router";
 })
 export class HeaderComponent {
   isScrolled: boolean = false;
+  url: string = URL;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

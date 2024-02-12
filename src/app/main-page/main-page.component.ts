@@ -154,7 +154,7 @@ export class MainPageComponent implements OnDestroy, OnInit {
       takeUntil(this._onDestroy$)
     ).subscribe((response: ICatalog) => {
       this.catalog = response;
-      this.catalog.contains = this.catalog.contains.slice(0, 2);
+      this.catalog.contains = this.catalog.contains.slice(0, 3);
       this.catalog.contains.push({
         img_path: "",
         name: "",
