@@ -57,16 +57,9 @@ ul {
           flex-direction: column;
           max-width: 400px;
 
-          .title, .title-info {
-            margin: 0;
-          }
-
           .title {
+            margin: 0;
             font-size: 1.7rem;
-          }
-
-          .title-info {
-            font-weight: 300;
           }
 
           @media (max-width: $breakpoint-md) {
@@ -81,10 +74,6 @@ ul {
 
       @media (max-width: $breakpoint-sm) {
         .logo-img {
-          display: none;
-        }
-
-        .title-info {
           display: none;
         }
       }
@@ -154,12 +143,8 @@ ul {
         margin: 0;
       }
 
-      .phone {
+      .phone-email {
         font-weight: 700;
-      }
-
-      .phone-info {
-        font-weight: 300;
       }
     }
 
